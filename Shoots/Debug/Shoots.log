@@ -1,0 +1,3 @@
+﻿  Main.cpp
+c:\users\yessica\documents\github\gameshoots\shoots\header.h(51): warning C4715: 'events': not all control paths return a value
+  Shoots.vcxproj -> C:\Users\Yessica\Documents\GitHub\GameShoots\Shoots\Debug\Shoots.exe
