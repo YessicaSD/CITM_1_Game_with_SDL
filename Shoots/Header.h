@@ -1,7 +1,7 @@
 #ifndef _HEADER_H_
 #define _HEADER_H_
 int width = 1920;
-int height = 1020;
+int height = 1010;
 typedef struct
 {
 	int x;
@@ -30,19 +30,19 @@ int events(position* red)
 		}
 		if (event.type == SDL_KEYDOWN)
 		{
-			if (event.key.keysym.sym==SDLK_LEFT && red->x<width)
+			if (event.key.keysym.sym==SDLK_LEFT && red->x >0)
 			{
 				red->x-=10;
 			}
-			if(event.key.keysym.sym == SDLK_RIGHT && )
+			if(event.key.keysym.sym == SDLK_RIGHT && (red->x)<width-50)
 			{
 				red->x += 10;
 			}
-			if (event.key.keysym.sym == SDLK_UP)
+			if (event.key.keysym.sym == SDLK_UP && (red->y)>0)
 			{
 				red->y -= 10;
 			}
-			if (event.key.keysym.sym == SDLK_DOWN)
+			if (event.key.keysym.sym == SDLK_DOWN && (red->y)<height - 50)
 			{
 				red->y += 10;
 			}

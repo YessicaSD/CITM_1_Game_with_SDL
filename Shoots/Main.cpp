@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
 	SDL_Renderer* renderer; // Declare a render
 
 	//Initialize the window and render variable
-	window = SDL_CreateWindow("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
+	window = SDL_CreateWindow("Game", 0,30, width, height, 0);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED); // SDL_RENDERED_ACCELERATED DOES THE RENDERER WITH THE HARDWARE ACCELERATION
 
 	
