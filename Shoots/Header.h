@@ -1,5 +1,8 @@
 #ifndef _HEADER_H_
 #define _HEADER_H_
+#include "SDL\include\SDL.h"
+#pragma comment (lib,"SDL/x86/SDL2.lib")
+#pragma comment (lib,"SDL/x86/SDL2main.lib")
 int width = 1920;
 int height = 1010;
 typedef struct
@@ -16,9 +19,9 @@ void shoot(SDL_Renderer* renderer, position*green)
 	while ((green->x)<width)
 	{
 		SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-		SDL_Rect redRect = { green->x,green->y,20,20 }; // {the x position, the y position, the width,height}
+		
 		SDL_RenderFillRect(renderer, &redRect);
-		green->x += 1;
+		green->x += 10;
 		SDL_RenderPresent(renderer);
 	}
 
@@ -38,7 +41,7 @@ int events(position* red, position*green,SDL_Renderer* renderer)
 			if (event.key.keysym.sym==SDLK_LEFT && red->x >0 )
 			{
 
-				red->x-=1;
+				red->x-=10;
 			}
 			if(event.key.keysym.sym == SDLK_RIGHT && (red->x)<width-50 )
 			{

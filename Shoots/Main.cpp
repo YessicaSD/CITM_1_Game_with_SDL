@@ -2,8 +2,8 @@
 #pragma comment (lib,"SDL/x86/SDL2.lib")
 #pragma comment (lib,"SDL/x86/SDL2main.lib")
 
-int width = 1920;
-int height = 1010;
+int width = 1680;
+int height = 1040;
 typedef struct
 {
 	int x;
@@ -14,6 +14,12 @@ int main(int argc, char* argv[])
 	SDL_Init(SDL_INIT_VIDEO);
 	
 	int escape = 0;
+
+	bool shoot= false; 
+	bool left = false;
+	bool right = false;
+	bool up = false;
+	bool down = false;
 
 	position red;
 	red.x = 960;
@@ -48,30 +54,30 @@ int main(int argc, char* argv[])
 		
 		while (SDL_PollEvent(&event))
 		{
-			if (event.type == SDL_WINDOWEVENT)
+			if (event.type == SDL_QUIT)
 			{
-				if (event.window.event == SDL_WINDOWEVENT_CLOSE) //https://wiki.libsdl.org/SDL_WindowEvent PREGUNTAR PQ ES EVENT.WINDOW.EVENT Y NO EVENT.WINDOW
 					return 1;
 			}
 			if (event.type == SDL_KEYDOWN)
 			{
-				if (event.key.keysym.sym == SDLK_LEFT && redRect.x >0 && event.type != SDL_KEYUP)
+				if (event.key.keysym.sym == SDLK_LEFT )
 				{
-					redRect.x -= 10;
+					left = true;
+					
 				}
-				if (event.key.keysym.sym == SDLK_RIGHT && redRect.x<width - 50 && event.type != SDL_KEYUP)
+				if (event.key.keysym.sym == SDLK_RIGHT  )
 				{
-					redRect.x += 10;
+					right = true;
 				}
-				if (event.key.keysym.sym == SDLK_UP && (redRect.y)>0 && event.type != SDL_KEYUP)
+				if (event.key.keysym.sym == SDLK_UP )
 				{
-					redRect.y -= 10;
+					up = true;
 				}
-				if (event.key.keysym.sym == SDLK_DOWN && (redRect.y)<height - 50 && event.type != SDL_KEYUP)
+				if (event.key.keysym.sym == SDLK_DOWN )
 				{
-					redRect.y += 10;
+					down = true;
 				}
-				if (event.key.keysym.sym == SDLK_ESCAPE && event.type != SDL_KEYUP)
+				if (event.key.keysym.sym == SDLK_ESCAPE)
 				{
 					return 1;
 				}
@@ -83,28 +89,66 @@ int main(int argc, char* argv[])
 				{
 					greenRect.x = redRect.x;
 					greenRect.y = redRect.y;
-					while (greenRect.x <width)
-					{
-						SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);	// Select the color for drawing. It is set to blue here.								
-						SDL_RenderClear(renderer);// Clear the entire screen to our selected color.
-
-						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-						SDL_RenderFillRect(renderer, &greenRect);
-						greenRect.x += 1;
-
-						SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-						SDL_RenderFillRect(renderer, &redRect);
-						
-
-						
-
-						SDL_RenderPresent(renderer);
-						
-					}
+					shoot = true;
+					
 				}
-			}
-		}
+				if (event.key.keysym.sym == SDLK_LEFT)
+				{
+					left = false;
 
+				}
+				if (event.key.keysym.sym == SDLK_RIGHT)
+				{
+					right = false;
+				}
+				if (event.key.keysym.sym == SDLK_UP)
+				{
+					up = false;
+				}
+				if (event.key.keysym.sym == SDLK_DOWN)
+				{
+					down = false;
+				}
+
+			}
+		}// fin de bucle
+
+
+		if (greenRect.x <width && shoot == true)
+		{
+			SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);	// Select the color for drawing. It is set to blue here.								
+			SDL_RenderClear(renderer);// Clear the entire screen to our selected color.
+
+			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+			SDL_RenderFillRect(renderer, &greenRect);
+			greenRect.x += 10;
+
+			SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+			SDL_RenderFillRect(renderer, &redRect);
+
+			SDL_RenderPresent(renderer);
+
+		}
+		if (greenRect.x==width)
+		{
+			shoot = false;
+		}
+		if (left == true && redRect.x>0)
+		{
+			redRect.x -= 10;
+		}
+		if (right == true && redRect.x<width - 50)
+		{
+			redRect.x += 10;
+		}
+		if (up == true && (redRect.y)>0)
+		{
+			redRect.y -= 10;
+		}
+		if (down == true && (redRect.y)<height - 50)
+		{
+			redRect.y += 10;
+		}
 		
 	}
 	SDL_DestroyWindow(window);
