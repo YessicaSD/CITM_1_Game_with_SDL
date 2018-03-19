@@ -1,7 +1,11 @@
 #include "SDL\include\SDL.h"
-#pragma comment (lib,"SDL/x86/SDL2.lib")
-#pragma comment (lib,"SDL/x86/SDL2main.lib")
+#include "SDL\include\SDL_image.h"
+#pragma comment(lib, "SDL/SDL2.lib")
+#pragma comment(lib, "SDL/SDL2main.lib")
+#pragma comment(lib,"SDL/SDL2_image.lib")
 
+
+#define distanceMovement 10
 int width = 1680;
 int height = 1040;
 
@@ -17,16 +21,30 @@ int main(int argc, char* argv[])
 	bool up = false;
 	bool down = false;
 
-	
+
 	int x0 = 960;
 	int y0 = 540;
 
 	SDL_Window* window; /* Declare a window*/
 	SDL_Renderer* renderer; // Declare a render
-
-							//Initialize the window and render variable
+	SDL_Texture*background;
+	//Initialize the window and render variable
 	window = SDL_CreateWindow("Game", 0, 30, width, height, 0);
-	renderer = SDL_CreateRenderer(window, -1, 0); // SDL_RENDERED_ACCELERATED DOES THE RENDERER WITH THE HARDWARE ACCELERATION
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC); // SDL_RENDERED_ACCELERATED DOES THE RENDERER WITH THE HARDWARE ACCELERATION
+
+	SDL_Surface* image = nullptr;
+	image = IMG_Load("../Source/test.png");
+	if (image == nullptr)
+	{
+		return 0;
+	}
+	else
+	{
+		background = SDL_CreateTextureFromSurface(renderer, image);
+		//SDL_QueryTexture(background, nullptr, nullptr,nullptr, nullptr);
+	}
+	SDL_Rect backgroundRec = { 0,0,width,height };
+
 
 	SDL_Rect redRect = { x0,y0,50,50 }; // {the x position, the y position, the width,height}
 	SDL_Rect greenRect = { x0,y0,20,20 }; // {the x position, the y position, the width,height}
@@ -34,12 +52,15 @@ int main(int argc, char* argv[])
 	SDL_Event event;
 	while (!escape)
 	{
+		SDL_RenderCopy(renderer, background, NULL, &backgroundRec);
 
-		SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);	// Select the color for drawing. It is set to blue here.								
-		SDL_RenderClear(renderer);// Clear the entire screen to our selected color.
+		//SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);	// Select the color for drawing. It is set to blue here.								
+		//SDL_RenderClear(renderer);// Clear the entire screen to our selected color.
+
 
 		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 		SDL_RenderFillRect(renderer, &redRect);
+
 		SDL_RenderPresent(renderer);
 
 		while (SDL_PollEvent(&event))
@@ -106,8 +127,10 @@ int main(int argc, char* argv[])
 
 		if (greenRect.x <width && shoot == true)
 		{
-			SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);	// Select the color for drawing. It is set to blue here.								
-			SDL_RenderClear(renderer);// Clear the entire screen to our selected color.
+			SDL_RenderCopy(renderer, background, NULL, &backgroundRec);
+
+			//SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);	// Select the color for drawing. It is set to blue here.								
+			//SDL_RenderClear(renderer);// Clear the entire screen to our selected color.
 
 			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 			SDL_RenderFillRect(renderer, &greenRect);
@@ -116,31 +139,35 @@ int main(int argc, char* argv[])
 			SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 			SDL_RenderFillRect(renderer, &redRect);
 
+
+
 			SDL_RenderPresent(renderer);
 			if (greenRect.x == width)
 				shoot = false;
-			
+
 
 		}
-		
+
 		if (left == true && redRect.x>0)
 		{
-			redRect.x -= 10;
+			redRect.x -= distanceMovement;
 		}
 		if (right == true && redRect.x<width - 50)
 		{
-			redRect.x += 10;
+			redRect.x += distanceMovement;
 		}
 		if (up == true && (redRect.y)>0)
 		{
-			redRect.y -= 10;
+			redRect.y -= distanceMovement;
 		}
 		if (down == true && (redRect.y)<height - 50)
 		{
-			redRect.y += 10;
+			redRect.y += distanceMovement;
 		}
 
 	}
+	SDL_DestroyTexture(background);
+	IMG_Quit();
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
