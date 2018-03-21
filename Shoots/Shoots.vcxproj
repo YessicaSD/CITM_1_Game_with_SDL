@@ -124,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h" />
+    <ClInclude Include="Render.h" />
     <ClInclude Include="Shoots.h" />
     <ClInclude Include="Start.h" />
   </ItemGroup>

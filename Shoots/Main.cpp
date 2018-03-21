@@ -7,81 +7,75 @@
 #include "Globals.h"
 #include "Shoots.h"
 #include "Start.h"
+#include "Render.h"
 
 
 int main(int argc, char* argv[])
 {
-	escape = start();
-	
-
+		escape=start();
+		
+		
 	
 	while (escape!=false)
 	{
-		SDL_RenderCopy(renderer, background, NULL, &backgroundRec);
+		render();
 
-		//SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);	// Select the color for drawing. It is set to blue here.								
-		//SDL_RenderClear(renderer);// Clear the entire screen to our selected color.
+		
 
-
-		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-		SDL_RenderFillRect(renderer, &redRect);
-
-		SDL_RenderPresent(renderer);
-
-		while (SDL_PollEvent(&event))
+		while (SDL_PollEvent(&g.event))
 		{
-			if (event.type == SDL_QUIT)
+			if (g.event.type == SDL_QUIT)
 			{
 				return 1;
 			}
-			if (event.type == SDL_KEYDOWN)
+			if (g.event.type == SDL_KEYDOWN)
 			{
-				if (event.key.keysym.sym == SDLK_LEFT)
+				if (g.event.key.keysym.sym == SDLK_LEFT)
 				{
 					leftPress = true;
 
 				}
-				if (event.key.keysym.sym == SDLK_RIGHT)
+				if (g.event.key.keysym.sym == SDLK_RIGHT)
 				{
 					rightPress = true;
 				}
-				if (event.key.keysym.sym == SDLK_UP)
+				if (g.event.key.keysym.sym == SDLK_UP)
 				{
 					upPress = true;
 				}
-				if (event.key.keysym.sym == SDLK_DOWN)
+				if (g.event.key.keysym.sym == SDLK_DOWN)
 				{
 					downPress = true;
 				}
-				if (event.key.keysym.sym == SDLK_ESCAPE)
+				if (g.event.key.keysym.sym == SDLK_ESCAPE)
 				{
 					return 1;
 				}
 
 			}
-			if (event.type == SDL_KEYUP)
+			if (g.event.type == SDL_KEYUP)
 			{
-				if (event.key.keysym.sym == SDLK_SPACE)
+				if (g.event.key.keysym.sym == SDLK_SPACE)
 				{
-					greenRect.x = redRect.x;
-					greenRect.y = redRect.y;
+					g.greenRect.x = g.redRect.x;
+					g.greenRect.y = g.redRect.y;
 					shoot = true;
 
 				}
-				if (event.key.keysym.sym == SDLK_LEFT)
+				if (g.event.key.keysym.sym == SDLK_LEFT)
 				{
 					leftPress = false;
 
 				}
-				if (event.key.keysym.sym == SDLK_RIGHT)
+				if (g.event.key.keysym.sym == SDLK_RIGHT)
 				{
 					rightPress = false;
 				}
-				if (event.key.keysym.sym == SDLK_UP)
+				if (g.event.key.keysym.sym == SDLK_UP)
 				{
 					upPress = false;
 				}
-				if (event.key.keysym.sym == SDLK_DOWN)
+				if (g.event.key.keysym.sym == SDLK_DOWN)
 				{
 					downPress = false;
 				}
@@ -90,51 +84,51 @@ int main(int argc, char* argv[])
 		}// fin de bucle
 
 
-		if (greenRect.x <SCREEN_WIDTH && shoot == true)
+		if (g.greenRect.x <SCREEN_WIDTH && shoot == true)
 		{
-			SDL_RenderCopy(renderer, background, NULL, &backgroundRec);
+			SDL_RenderCopy(g.renderer, g.background, NULL, &g.backgroundRec);
 
 			//SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);	// Select the color for drawing. It is set to blue here.								
 			//SDL_RenderClear(renderer);// Clear the entire screen to our selected color.
 
-			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-			SDL_RenderFillRect(renderer, &greenRect);
-			greenRect.x += 10;
+			SDL_SetRenderDrawColor(g.renderer, 0, 255, 0, 255);
+			SDL_RenderFillRect(g.renderer, &g.greenRect);
+			g.greenRect.x += 10;
 
-			SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-			SDL_RenderFillRect(renderer, &redRect);
+			SDL_SetRenderDrawColor(g.renderer, 255, 0, 0, 255);
+			SDL_RenderFillRect(g.renderer, &g.redRect);
 
 
 
-			SDL_RenderPresent(renderer);
-			if (greenRect.x == SCREEN_WIDTH)
+			SDL_RenderPresent(g.renderer);
+			if (g.greenRect.x == SCREEN_WIDTH)
 				shoot = false;
 
 
 		}
 
-		if (leftPress == true && redRect.x>0)
+		if (leftPress == true && g.redRect.x>0)
 		{
-			redRect.x -= distanceMovement;
+			g.redRect.x -= distanceMovement;
 		}
-		if (rightPress == true && redRect.x<SCREEN_WIDTH - CHARACTER_WIDTH)
+		if (rightPress == true && g.redRect.x<SCREEN_WIDTH - CHARACTER_WIDTH)
 		{
-			redRect.x += distanceMovement;
+			g.redRect.x += distanceMovement;
 		}
-		if (upPress == true && (redRect.y)>0)
+		if (upPress == true && (g.redRect.y)>0)
 		{
-			redRect.y -= distanceMovement;
+			g.redRect.y -= distanceMovement;
 		}
-		if (downPress == true && (redRect.y)<SCREEN_HEIGHT - CHARACTER_WIDTH)
+		if (downPress == true && (g.redRect.y)<SCREEN_HEIGHT - CHARACTER_WIDTH)
 		{
-			redRect.y += distanceMovement;
+			g.redRect.y += distanceMovement;
 		}
 
 	}
-	SDL_DestroyTexture(background);
+	SDL_DestroyTexture(g.background);
 	IMG_Quit();
-	SDL_DestroyWindow(window);
-	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(g.window);
+	SDL_DestroyRenderer(g.renderer);
 	SDL_Quit();
 
 	return 0;
