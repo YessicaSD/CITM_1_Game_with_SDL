@@ -4,53 +4,18 @@
 #pragma comment(lib, "SDL/SDL2main.lib")
 #pragma comment(lib,"SDL/SDL2_image.lib")
 
+#include "Globals.h"
+#include "Shoots.h"
+#include "Start.h"
 
-#define distanceMovement 10
-int width = 1680;
-int height = 1040;
 
 int main(int argc, char* argv[])
 {
-	SDL_Init(SDL_INIT_VIDEO);
+	escape = start();
+	
 
-	int escape = 0;
-
-	bool shoot = false;
-	bool left = false;
-	bool right = false;
-	bool up = false;
-	bool down = false;
-
-
-	int x0 = 960;
-	int y0 = 540;
-
-	SDL_Window* window; /* Declare a window*/
-	SDL_Renderer* renderer; // Declare a render
-	SDL_Texture*background;
-	//Initialize the window and render variable
-	window = SDL_CreateWindow("Game", 0, 30, width, height, 0);
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC); // SDL_RENDERED_ACCELERATED DOES THE RENDERER WITH THE HARDWARE ACCELERATION
-
-	SDL_Surface* image = nullptr;
-	image = IMG_Load("../Source/test.png");
-	if (image == nullptr)
-	{
-		return 0;
-	}
-	else
-	{
-		background = SDL_CreateTextureFromSurface(renderer, image);
-		//SDL_QueryTexture(background, nullptr, nullptr,nullptr, nullptr);
-	}
-	SDL_Rect backgroundRec = { 0,0,width,height };
-
-
-	SDL_Rect redRect = { x0,y0,50,50 }; // {the x position, the y position, the width,height}
-	SDL_Rect greenRect = { x0,y0,20,20 }; // {the x position, the y position, the width,height}
-
-	SDL_Event event;
-	while (!escape)
+	
+	while (escape!=false)
 	{
 		SDL_RenderCopy(renderer, background, NULL, &backgroundRec);
 
@@ -73,20 +38,20 @@ int main(int argc, char* argv[])
 			{
 				if (event.key.keysym.sym == SDLK_LEFT)
 				{
-					left = true;
+					leftPress = true;
 
 				}
 				if (event.key.keysym.sym == SDLK_RIGHT)
 				{
-					right = true;
+					rightPress = true;
 				}
 				if (event.key.keysym.sym == SDLK_UP)
 				{
-					up = true;
+					upPress = true;
 				}
 				if (event.key.keysym.sym == SDLK_DOWN)
 				{
-					down = true;
+					downPress = true;
 				}
 				if (event.key.keysym.sym == SDLK_ESCAPE)
 				{
@@ -105,27 +70,27 @@ int main(int argc, char* argv[])
 				}
 				if (event.key.keysym.sym == SDLK_LEFT)
 				{
-					left = false;
+					leftPress = false;
 
 				}
 				if (event.key.keysym.sym == SDLK_RIGHT)
 				{
-					right = false;
+					rightPress = false;
 				}
 				if (event.key.keysym.sym == SDLK_UP)
 				{
-					up = false;
+					upPress = false;
 				}
 				if (event.key.keysym.sym == SDLK_DOWN)
 				{
-					down = false;
+					downPress = false;
 				}
 
 			}
 		}// fin de bucle
 
 
-		if (greenRect.x <width && shoot == true)
+		if (greenRect.x <SCREEN_WIDTH && shoot == true)
 		{
 			SDL_RenderCopy(renderer, background, NULL, &backgroundRec);
 
@@ -142,25 +107,25 @@ int main(int argc, char* argv[])
 
 
 			SDL_RenderPresent(renderer);
-			if (greenRect.x == width)
+			if (greenRect.x == SCREEN_WIDTH)
 				shoot = false;
 
 
 		}
 
-		if (left == true && redRect.x>0)
+		if (leftPress == true && redRect.x>0)
 		{
 			redRect.x -= distanceMovement;
 		}
-		if (right == true && redRect.x<width - 50)
+		if (rightPress == true && redRect.x<SCREEN_WIDTH - CHARACTER_WIDTH)
 		{
 			redRect.x += distanceMovement;
 		}
-		if (up == true && (redRect.y)>0)
+		if (upPress == true && (redRect.y)>0)
 		{
 			redRect.y -= distanceMovement;
 		}
-		if (down == true && (redRect.y)<height - 50)
+		if (downPress == true && (redRect.y)<SCREEN_HEIGHT - CHARACTER_WIDTH)
 		{
 			redRect.y += distanceMovement;
 		}
