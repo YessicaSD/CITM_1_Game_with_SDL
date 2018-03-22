@@ -13,6 +13,8 @@ bool start()
 
 
 	// Load image lib --
+
+	//Load background
 	IMG_Init(IMG_INIT_PNG);
 	g.image = IMG_Load("../Sources/TileMap1.png");
 	if (g.image == nullptr)
@@ -26,6 +28,19 @@ bool start()
 
 	g.backgroundRec = { g.backgroundScroll,0,SCREEN_WIDTH,SCREEN_HEIGHT };
 	
+	//Load ship1
+
+	g.image = IMG_Load("../Sources/SpaceShip_player1.png");
+	if (g.image == nullptr)
+	{
+		return false;
+	}
+	else
+	{
+		g.background = SDL_CreateTextureFromSurface(g.renderer, g.image);
+	}
+
+	g.backgroundRec = { g.backgroundScroll,0,SCREEN_WIDTH,SCREEN_HEIGHT };
 
 	return true;
 }
