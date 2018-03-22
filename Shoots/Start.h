@@ -24,7 +24,7 @@ bool start()
 		g.background = SDL_CreateTextureFromSurface(g.renderer, g.image);
 	}
 
-	g.backgroundRec = { 0,0,SCREEN_WIDTH,SCREEN_HEIGHT };
+	g.backgroundRec = { g.backgroundScroll,0,SCREEN_WIDTH,SCREEN_HEIGHT };
 	
 
 	return true;

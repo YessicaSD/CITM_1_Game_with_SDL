@@ -6,7 +6,7 @@
 int SCREEN_WIDTH = 320;
 int SCREEN_HEIGHT = 224;
 
-int SCROLL_SPEED = 5;
+int SCROLL_SPEED = 10;
 
 int CHARACTER_SPEED = 10;
 int CHARACTER_WIDTH = 10;
@@ -39,7 +39,7 @@ struct globals
 	SDL_Texture * ship1 = nullptr;
 	SDL_Surface* image = nullptr;
 
-	SDL_Rect backgroundRec = { 0,0,backgroundWidth,backgroundHeight};
+	SDL_Rect backgroundRec = { backgroundScroll,0,backgroundWidth,backgroundHeight};
 
 	SDL_Rect redRect = { CHARACTER_X,CHARACTER_Y,CHARACTER_WIDTH,CHARACTER_HEIGHT }; // {the x position, the y position, the width,height}
 	SDL_Rect greenRect = { CHARACTER_X,CHARACTER_Y,20,20 }; // {the x position, the y position, the width,height}
