@@ -23,8 +23,12 @@ void render()
 
 
 	//Set ship1
-	SDL_SetRenderDrawColor(g.renderer, 255, 0, 0, 255);
-	SDL_RenderFillRect(g.renderer, &g.redRect);
+	target = { g.CHARACTER_X, g.CHARACTER_Y, 10, 10 };
+	SDL_RenderCopy(g.renderer, g.ship1, nullptr, &target);
+
+
+	/*SDL_SetRenderDrawColor(g.renderer, 255, 0, 0, 255);
+	SDL_RenderFillRect(g.renderer, &g.redRect);*/
 
 
 

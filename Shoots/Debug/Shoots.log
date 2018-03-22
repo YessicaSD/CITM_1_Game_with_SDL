@@ -1,3 +1,4 @@
 ﻿  Main.cpp
+c:\users\yessicasd\documents\github\game_with_sdl\shoots\checkinput.h(65): warning C4715: 'checkInput': not all control paths return a value
   Shoots.vcxproj -> C:\Users\yessicasd\Documents\GitHub\Game_with_SDL\Shoots\Debug\Shoots.exe
   Shoots.vcxproj -> C:\Users\yessicasd\Documents\GitHub\Game_with_SDL\Shoots\Debug\Shoots.pdb (Partial PDB)

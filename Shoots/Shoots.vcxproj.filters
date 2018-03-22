@@ -32,5 +32,8 @@
     <ClInclude Include="Render.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CheckInput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -8,7 +8,7 @@
 #include "Shoots.h"
 #include "Start.h"
 #include "Render.h"
-
+#include "CheckInput.h"
 
 int main(int argc, char* argv[])
 {
@@ -19,69 +19,10 @@ int main(int argc, char* argv[])
 	while (escape!=false)
 	{
 		render();
-
+		escape=checkInput();
 		
 
-		while (SDL_PollEvent(&g.event))
-		{
-			if (g.event.type == SDL_QUIT)
-			{
-				return 1;
-			}
-			if (g.event.type == SDL_KEYDOWN)
-			{
-				if (g.event.key.keysym.sym == SDLK_LEFT)
-				{
-					leftPress = true;
-
-				}
-				if (g.event.key.keysym.sym == SDLK_RIGHT)
-				{
-					rightPress = true;
-				}
-				if (g.event.key.keysym.sym == SDLK_UP)
-				{
-					upPress = true;
-				}
-				if (g.event.key.keysym.sym == SDLK_DOWN)
-				{
-					downPress = true;
-				}
-				if (g.event.key.keysym.sym == SDLK_ESCAPE)
-				{
-					return 1;
-				}
-
-			}
-			if (g.event.type == SDL_KEYUP)
-			{
-				if (g.event.key.keysym.sym == SDLK_SPACE)
-				{
-					g.greenRect.x = g.redRect.x;
-					g.greenRect.y = g.redRect.y;
-					shoot = true;
-
-				}
-				if (g.event.key.keysym.sym == SDLK_LEFT)
-				{
-					leftPress = false;
-
-				}
-				if (g.event.key.keysym.sym == SDLK_RIGHT)
-				{
-					rightPress = false;
-				}
-				if (g.event.key.keysym.sym == SDLK_UP)
-				{
-					upPress = false;
-				}
-				if (g.event.key.keysym.sym == SDLK_DOWN)
-				{
-					downPress = false;
-				}
-
-			}
-		}// fin de bucle
+		
 
 
 		if (g.greenRect.x <SCREEN_WIDTH && shoot == true)

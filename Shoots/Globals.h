@@ -11,8 +11,7 @@ int SCROLL_SPEED = 1;
 int CHARACTER_SPEED = 10;
 int CHARACTER_WIDTH = 10;
 int CHARACTER_HEIGHT = 10;
-int CHARACTER_X = SCREEN_WIDTH/2;
-int CHARACTER_Y = SCREEN_HEIGHT/2;
+
 
 int NUM_SHOTS = 32;
 int SHOOT_SPEED = 5;
@@ -30,6 +29,8 @@ bool downPress = false;
 
 struct globals
 {
+	int CHARACTER_X = SCREEN_WIDTH / 2;
+	int CHARACTER_Y = SCREEN_HEIGHT / 2;
 	int backgroundScroll = 0;
 	int backgroundWidth = 4408;
 	int backgroundHeight = 224;

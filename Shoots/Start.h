@@ -28,8 +28,9 @@ bool start()
 
 	g.backgroundRec = { g.backgroundScroll,0,SCREEN_WIDTH,SCREEN_HEIGHT };
 	
-	//Load ship1
 
+
+	//Load ship1
 	g.image = IMG_Load("../Sources/SpaceShip_player1.png");
 	if (g.image == nullptr)
 	{
@@ -37,7 +38,7 @@ bool start()
 	}
 	else
 	{
-		g.background = SDL_CreateTextureFromSurface(g.renderer, g.image);
+		g.ship1 = SDL_CreateTextureFromSurface(g.renderer, g.image);
 	}
 
 	g.backgroundRec = { g.backgroundScroll,0,SCREEN_WIDTH,SCREEN_HEIGHT };
