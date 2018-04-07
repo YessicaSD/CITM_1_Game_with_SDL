@@ -123,11 +123,15 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CheckInput.h" />
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="ModuleBackground.h" />
+    <ClInclude Include="ModuleInput.h" />
     <ClInclude Include="Globals.h" />
-    <ClInclude Include="Render.h" />
-    <ClInclude Include="Shoots.h" />
-    <ClInclude Include="Start.h" />
+    <ClInclude Include="MemLeaks.h" />
+    <ClInclude Include="Module.h" />
+    <ClInclude Include="ModuleRender.h" />
+    <ClInclude Include="ModuleTexture.h" />
+    <ClInclude Include="ModuleWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

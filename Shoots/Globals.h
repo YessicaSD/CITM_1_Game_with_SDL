@@ -1,54 +1,43 @@
 #ifndef _GLOBALS_H_
 #define _GLOBALS_H_
+#include <windows.h>
+#include <stdio.h>
 
+#define EXIT_FAILURE 1
+#define EXIT_SUCCESS 0
 
-#define distanceMovement 10
-int SCREEN_WIDTH = 320;
-int SCREEN_HEIGHT = 224;
-
-int SCROLL_SPEED = 1;
-
-int CHARACTER_SPEED = 10;
-int CHARACTER_WIDTH = 10;
-int CHARACTER_HEIGHT = 10;
-
-
-int NUM_SHOTS = 32;
-int SHOOT_SPEED = 5;
-
-
-int escape = 0;
-
-bool shoot = false;
-
-
-bool leftPress = false;
-bool rightPress = false;
-bool upPress = false;
-bool downPress = false;
-
-struct globals
+enum update_status
 {
-	int CHARACTER_X = SCREEN_WIDTH / 2;
-	int CHARACTER_Y = SCREEN_HEIGHT / 2;
-	int backgroundScroll = 0;
-	int backgroundWidth = 4408;
-	int backgroundHeight = 224;
-	SDL_Window* window = nullptr; /* Declare a window*/
-	SDL_Renderer* renderer = nullptr; // Declare a render
-	SDL_Texture* background = nullptr;
-	SDL_Texture * ship1 = nullptr;
-	SDL_Surface* image = nullptr;
+	UPDATE_CONTINUE = 1,
+	UPDATE_STOP,
+	UPDATE_ERROR
+};
+// Useful typedefs ---------
+typedef unsigned int uint;
 
-	SDL_Rect backgroundRec = { backgroundScroll,0,backgroundWidth,backgroundHeight};
+//Configuration------------------------
+#define SCREEN_SIZE 1
+#define SCREEN_WIDTH  320
+#define SCREEN_HEIGHT 224
+#define WIN_FULLSCREEN 0
+#define WIN_FULLSCREEN_DESKTOP 0
+#define WIN_BORDERLESS 0
+#define WIN_RESIZABLE 0
+#define REN_VSYNC 1
 
-	SDL_Rect redRect = { CHARACTER_X,CHARACTER_Y,CHARACTER_WIDTH,CHARACTER_HEIGHT }; // {the x position, the y position, the width,height}
-	SDL_Rect greenRect = { CHARACTER_X,CHARACTER_Y,20,20 }; // {the x position, the y position, the width,height}
+#define LOG(format, ...) log(__FILE__, __LINE__, format, __VA_ARGS__);
+void log(const char file[], int line, const char* format, ...) {
+	static char tmp_string[4096];
+	static char tmp_string2[4096];
+	static va_list  ap;
 
-	SDL_Event event;
-}g;
-
-
+	// Construct the string from variable arguments
+	va_start(ap, format);
+	vsprintf_s(tmp_string, 4096, format, ap);
+	va_end(ap);
+	sprintf_s(tmp_string2, 4096, "\n%s(%d) : %s", file, line, tmp_string);
+	OutputDebugString(tmp_string2);
+}
 
 #endif // !_GLOBALS_H_
 

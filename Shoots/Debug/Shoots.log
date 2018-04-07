@@ -1,4 +1,12 @@
 ﻿  Main.cpp
-c:\users\yessicasd\documents\github\game_with_sdl\shoots\checkinput.h(65): warning C4715: 'checkInput': not all control paths return a value
-  Shoots.vcxproj -> C:\Users\yessicasd\Documents\GitHub\Game_with_SDL\Shoots\Debug\Shoots.exe
-  Shoots.vcxproj -> C:\Users\yessicasd\Documents\GitHub\Game_with_SDL\Shoots\Debug\Shoots.pdb (Partial PDB)
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\crtdbg.h(302): warning C4005: '_malloca': redefinición de macro
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\malloc.h(120): note: vea la definición anterior de '_malloca'
+c:\program files (x86)\windows kits\8.1\include\um\combaseapi.h(229): error C2760: error de sintaxis: token "identificador" donde se esperaba "especificador de tipo"
+c:\users\yessica\documents\github\game_with_sdl\shoots\modulerender.h(27): error C2065: 'App': identificador no declarado
+c:\users\yessica\documents\github\game_with_sdl\shoots\modulerender.h(27): error C2227: el operando izquierdo de '->window' debe señalar al tipo class/struct/union/generic
+  c:\users\yessica\documents\github\game_with_sdl\shoots\modulerender.h(27): note: el tipo es 'unknown-type'
+c:\users\yessica\documents\github\game_with_sdl\shoots\moduletexture.h(71): error C2065: 'App': identificador no declarado
+c:\users\yessica\documents\github\game_with_sdl\shoots\moduletexture.h(71): error C2227: el operando izquierdo de '->render' debe señalar al tipo class/struct/union/generic
+  c:\users\yessica\documents\github\game_with_sdl\shoots\moduletexture.h(71): note: el tipo es 'unknown-type'
+c:\users\yessica\documents\github\game_with_sdl\shoots\moduletexture.h(71): error C2227: el operando izquierdo de '->renderer' debe señalar al tipo class/struct/union/generic
+c:\users\yessica\documents\github\game_with_sdl\shoots\main.cpp(48): error C3861: 'start': no se encontró el identificador
